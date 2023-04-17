@@ -1,60 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
-</head>
-
+{% extends 'base.html' %}
+{% block content %}
 <body style="background-color:whitesmoke ;">
     
-        <style>
-            .container {
-                background-color: transparent;
-            }
-        
-            body {
-                background: rgb(238, 174, 202);
-                background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
-        
-            }
-        
-            html,
-            body {
-                min-height: 100%;
-            }
-        </style>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-                <div class="card mt-5 border-3 border border-dark  ">
-                    <div class="card-header text-center text-bg-succes text-opacity-50" >
-                       <h3>Create a new Contact</h3> 
-                    </div>
-                    <div class="card-body">
-                        <form action="{% url 'contact-create' %}" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{form.as_p}}
-                            <div class="text-center">
-                                <input type="submit"  class="btn btn-success" value="Create">
-                            </div>
-                            
-                        </form>
-                    </div>
-                </div> 
-            </div>
-            <div class="col-4"></div>
-        </div>
-   
-    </div>
+    <style>
+        .container {
+            background-color: transparent;
+        }
     
+        body {
+            background: rgb(238, 174, 202);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    
+        }
+    
+        html,
+        body {
+            min-height: 100%;
+        }
+    </style>
 
-</body>
-</html>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="card mt-5 border-3 border border-dark  ">
+                <div class="card-header text-center text-bg-succes text-opacity-50" >
+                   <h3>Create a new Contact</h3> 
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'contact-create' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="text-center">
+                            <input type="submit"  class="btn btn-success" value="Create">
+                        </div>
+                        
+                    </form>
+                </div>
+            </div> 
+        </div>
+        <div class="col-4"></div>
+    </div>
+
+</div>
+<br>
+
+
+
+
+{% endblock  %}
+
+
+
+
 

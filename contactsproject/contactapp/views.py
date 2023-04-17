@@ -8,15 +8,19 @@ from .forms import ContactForm, ContactUpdateForm
 # View to add Contact details
 
 
-class ContactCreateView(View):
+class ContactCreateView(TemplateView):
 
-    def get(self, request):
-        form = ContactForm()
-        return render(request, "createcontact.html", {'form': form})
+    template_name = "createcontact.html"
+    form_class = ContactForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()
+        return context
 
     def post(self, request):
         print(request.POST, '***********')
-        form = ContactForm(request.POST, request.FILES)
+        form = self.form_class(request.POST, request.FILES)
         print(form, '-----------------')
         if form.is_valid():
             print(form.cleaned_data)
@@ -42,19 +46,13 @@ class ContactListView(TemplateView):
 
 class ContactDetailsView(TemplateView):
 
-    def get(self, request, id):
+    model = Contacts
+    template_name = "contactdetail.html"
 
-        # we're getting a single instance of Contact from Contacts by passing an ID value.
-        contact = Contacts.objects.get(id=id)
-        return render(request, "contactdetail.html", {'contact': contact})
-    
-    def delete(request, **kwargs):
-        cont_id = kwargs.get("id")
-        print(cont_id,"*************")
-        Contacts.objects.get(id=cont_id).delete()
-        print(cont_id,"################")
-
-        return redirect("contact-list")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["contact_id"] = Contacts.objects.get(id=kwargs['id'])
+        return context
 
 
 # To update a Contact
@@ -67,18 +65,24 @@ class ContactUpdateView(TemplateView):
 
         context = super().get_context_data(**kwargs)
         contact = Contacts.objects.get(id=kwargs['id'])
-        form = ContactForm(instance=contact)
+        form = ContactUpdateForm(instance=contact)
         context['form'] = form
         return context
 
     def post(self, request, *args, **kwargs):
         instance = Contacts.objects.get(id=kwargs['id'])
-        form = ContactForm(request.POST, request.FILES, instance=instance)
+        form = ContactUpdateForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect("contact-list")
+            return redirect('contact-list')
         context = self.get_context_data(**kwargs)
         context['form'] = form
         return self.render_to_response(context)
 
 
+# To delete a Contact_id from record
+def delete(request, **kwargs):
+    cont_id = kwargs.get("id")
+    contact = Contacts.objects.get(id=cont_id)
+    contact.delete()
+    return redirect("contact-list")

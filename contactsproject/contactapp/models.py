@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 
-#model to add contact details
+# model to add contact details
+
 
 class Contacts(models.Model):
     name = models.CharField(max_length=50)
@@ -14,10 +15,7 @@ class Contacts(models.Model):
     }
     gender = models.CharField(choices=gender_choices, max_length=10, null=True, blank=True)
     image = models.ImageField(upload_to='media', blank=True, null=True)
-    
 
 
 def __str__(self):
     return self.contact_name
-
-

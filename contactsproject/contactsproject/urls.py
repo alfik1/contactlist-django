@@ -23,11 +23,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.ContactCreateView.as_view(),name='contact-create'),
-    path('mycontacts',views.ContactListView.as_view(),name ="contact-list"),
-    path('details/<int:id>',views.ContactDetailsView.as_view(),name ="contact-detail"),
-    path('mycontacts/update/<int:id>',views.ContactUpdateView.as_view(),name ="contact-update"),
-    path('mycontacts/<int:id>/delete',views.ContactDetailsView.as_view(),name="delete"),
+    path('', views.ContactCreateView.as_view(), name='contact-create'),
+    path('mycontacts', views.ContactListView.as_view(), name='contact-list'),
+    path('details/<int:id>', views.ContactDetailsView.as_view(), name='contact-detail'),
+    path('mycontacts/update/<int:id>', views.ContactUpdateView.as_view(), name='contact-update'),
+    path('mycontacts/<int:id>/delete', views.delete, name='delete'),
 
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
