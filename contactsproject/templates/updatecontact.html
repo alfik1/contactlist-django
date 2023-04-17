@@ -23,7 +23,7 @@
                        <h3>Create a new Contact</h3> 
                     </div>
                     <div class="card-body">
-                        <form action="{% url 'contact-update' form.instance.id %}" method="POST" enctype="multipart/form-data">
+                        <form action="{% url 'contact-update' form.instance.id %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{form.as_p}}
                             <div class="text-center">

@@ -13,7 +13,7 @@ class ContactForm(forms.ModelForm):
         widgets = {
             "name" :forms.TextInput(attrs={"class":"form-control border border-dark","placeholder":"enter name"}),
             "email": forms.EmailInput(attrs={"class": " form-control border border-dark", "placeholder": "enter email"}),
-            "phone" :forms.NumberInput(attrs={"class": " form-control border border-dark", "placeholder": "enter email"}),
+            "phone" :forms.NumberInput(attrs={"class": " form-control border border-dark", "placeholder": "enter phone number"}),
             "images":forms.FileInput(attrs={"class":"form-select mt-2"})
         }
 

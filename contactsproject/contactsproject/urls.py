@@ -27,7 +27,7 @@ urlpatterns = [
     path('mycontacts',views.ContactListView.as_view(),name ="contact-list"),
     path('details/<int:id>',views.ContactDetailsView.as_view(),name ="contact-detail"),
     path('mycontacts/update/<int:id>',views.ContactUpdateView.as_view(),name ="contact-update"),
-    path('mycontacts/<int:id>/remove',views.remove_contact,name="remove")
+    path('mycontacts/<int:id>/delete',views.ContactDetailsView.as_view(),name="delete"),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
